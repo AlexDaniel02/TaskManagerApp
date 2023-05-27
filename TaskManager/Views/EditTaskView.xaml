@@ -1,0 +1,76 @@
+﻿<Window x:Class="TaskManager.Views.EditTaskView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TaskManager.Views"
+        xmlns:viewModels="clr-namespace:TaskManager.ViewModels"
+        xmlns:models="clr-namespace:TaskManager.Models"
+        mc:Ignorable="d"
+        Background="Lavender"
+        FontFamily="Arial"
+        ResizeMode="NoResize"
+        Title="EditTaskView" Height="330" Width="250">
+    <Window.DataContext>
+        <viewModels:EditTaskViewModel/>
+    </Window.DataContext>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Name:" Grid.Row="0" Grid.Column="0" Margin="0,10,5,5" />
+        <TextBox x:Name="NameTextBox" Text="{Binding Name, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" Margin="5,10,0,5" />
+        <Label Content="Description:" Grid.Row="1" Grid.Column="0" Margin="0,5,5,5" />
+        <TextBox x:Name="DescriptionTextBox" Text="{Binding Description, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" Margin="5,5,0,5" />
+        <Label Content="Deadline:" Grid.Row="2" Grid.Column="0" Margin="0,5,5,5" />
+        <DatePicker x:Name="DeadlineDatePicker" SelectedDate="{Binding Deadline, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" Margin="5,5,0,5" />
+        <Label Content="Category:" Grid.Row="4" Grid.Column="0" Margin="0,5,5,5" />
+        <ComboBox x:Name="CategoryTextBox" SelectedItem="{Binding SelectedCategory,Mode=TwoWay}" Grid.Row="4" Grid.Column="1" Margin="5,5,0,5" >
+            <ComboBox.ItemsSource>
+                <x:Array Type="{x:Type models:Category}">
+                    <models:Category>Home</models:Category>
+                    <models:Category>School</models:Category>
+                    <models:Category>Work</models:Category>
+                    <models:Category>Other</models:Category>
+                    <models:Category>Shopping</models:Category>
+                </x:Array>
+            </ComboBox.ItemsSource>
+        </ComboBox>
+        <Label Content="Priority:" Grid.Row="5" Grid.Column="0" Margin="0,5,5,5"/>
+        <ComboBox x:Name="PriorityComboBox" Grid.Row="5" Grid.Column="1" Margin="5,5,0,5" SelectedItem="{Binding SelectedPriority, Mode=TwoWay}">
+            <ComboBox.ItemsSource>
+                <x:Array Type="{x:Type models:Priority}">
+                    <models:Priority>Low</models:Priority>
+                    <models:Priority>Medium</models:Priority>
+                    <models:Priority>High</models:Priority>
+                </x:Array>
+            </ComboBox.ItemsSource>
+        </ComboBox>
+        <Label Content="Status:" Grid.Row="6" Grid.Column="0" Margin="0,5,5,5"/>
+        <ComboBox x:Name="StatusComboBox" Grid.Row="6" Grid.Column="1" Margin="5,5,0,5" SelectedItem="{Binding SelectedStatus, Mode=TwoWay}">
+            <ComboBox.ItemsSource>
+                <x:Array Type="{x:Type models:Status}">
+                    <models:Status>Created</models:Status>
+                    <models:Status>InProgress</models:Status>
+                </x:Array>
+            </ComboBox.ItemsSource>
+        </ComboBox>
+        <Button x:Name="AddTaskButton" IsEnabled="True" Content="Edit Task" Grid.Row="7" Grid.Column="1" Margin="5,20,0,0" HorizontalAlignment="Left" Width="75" Command="{Binding SubmitTaskCommand}" Background="SlateBlue" />
+    </Grid>
+</Window>
